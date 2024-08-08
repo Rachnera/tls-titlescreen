@@ -1,7 +1,7 @@
 module CustomTitleScreen
   CONFIG = {
     font: {
-      name: "Montserrat Black",
+      name: "Nunito",
     }
   }
 end
