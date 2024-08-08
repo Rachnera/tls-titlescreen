@@ -23,4 +23,8 @@ class Window_TitleCommand < Window_Command
 
     contents.font.name = old_f
   end
+
+  def alignment
+    1
+  end
 end
