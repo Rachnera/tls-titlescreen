@@ -1,7 +1,6 @@
 ## Setup
 
-- Copy the `TitleScreen.png` file to the `Graphics/System/` folder
-- Copy the `Fonts/` folder to the root of the project
+- Copy the `Graphics/` and `Fonts/` folders to the root of the project
 - Add the `CustomTitleScreen.rb` file as a new script
 
 ## How to
