@@ -39,4 +39,24 @@ class Window_TitleCommand < Window_Command
     contents.blt(text_rect.x + 8, text_rect.y + 4, logo, logo.rect)
     contents.blt(text_rect.x + text_rect.width - 24, text_rect.y + 4, logo, logo.rect)
   end
+
+  # Skip continue if disabled
+  alias original_879_cursor_down cursor_down
+  def cursor_down(wrap = false)
+    if not continue_enabled and index+1 < @list.length and @list[index+1][:symbol] == :continue
+      select(index+2)
+      return
+    end
+
+    original_879_cursor_down(wrap)
+  end
+  alias original_879_cursor_up cursor_up
+  def cursor_up(wrap = false)
+    if not continue_enabled and index > 0 and @list[index-1][:symbol] == :continue
+      select(index-2)
+      return
+    end
+
+    original_879_cursor_up(wrap)
+  end
 end
