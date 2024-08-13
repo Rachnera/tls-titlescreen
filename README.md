@@ -12,3 +12,6 @@
 
 See [there](https://forums.rpgmakerweb.com/index.php?threads/how-do-i-font-change-vx-ace.136293/#post-1186160) for help with debugging some common issues (typo, folder hierarchy, etc.)
 
+### Change text colors
+
+Update the config parameters `color` -> `text` and/or `color` -> `outline` with the RGBA values of the desired color(s).

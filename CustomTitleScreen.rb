@@ -4,6 +4,10 @@ module CustomTitleScreen
       name: "Nunito",
       size: 32,
     },
+    color: { # RGBA format
+      text: [31, 37, 37, 255],
+      outline: [181, 161, 128, 255],
+    }
   }
 
   class << self
@@ -26,6 +30,8 @@ class Window_TitleCommand < Window_Command
     old_f = contents.font.name
     contents.font.name = CustomTitleScreen::CONFIG[:font][:name]
     contents.font.size = font_size
+    contents.font.color = Color.new(*CustomTitleScreen::CONFIG[:color][:text])
+    contents.font.out_color = Color.new(*CustomTitleScreen::CONFIG[:color][:outline])
 
     contents.draw_text(*args)
 
