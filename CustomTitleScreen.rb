@@ -7,6 +7,7 @@ module CustomTitleScreen
     color: { # RGBA format
       text: [31, 37, 37, 255],
       outline: [181, 161, 128, 255],
+      disabled: [127, 127, 127, 255],
     }
   }
 
@@ -26,14 +27,29 @@ class Scene_Title < Scene_Base
 end
 
 class Window_TitleCommand < Window_Command
-  def draw_text(*args)
+  alias_method :original_879_initialize, :initialize
+  def initialize
+    original_879_initialize
+
+    select_symbol(:new_game) if !continue_enabled
+  end
+
+  def draw_item(index)
+    change_color(normal_color, command_enabled?(index))
+
     old_f = contents.font.name
     contents.font.name = CustomTitleScreen::CONFIG[:font][:name]
     contents.font.size = font_size
-    contents.font.color = Color.new(*CustomTitleScreen::CONFIG[:color][:text])
+
+    contents.font.color =
+      if command_enabled?(index)
+        Color.new(*CustomTitleScreen::CONFIG[:color][:text])
+      else
+        Color.new(*CustomTitleScreen::CONFIG[:color][:disabled])
+      end
     contents.font.out_color = Color.new(*CustomTitleScreen::CONFIG[:color][:outline])
 
-    contents.draw_text(*args)
+    draw_text(item_rect_for_text(index), command_name(index), alignment)
 
     contents.font.name = old_f
     reset_font_settings # Reset font size and color; cf Yanfly Core; might not be strictly necessary, but better safe than sorry
