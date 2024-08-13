@@ -30,8 +30,9 @@ class Window_TitleCommand < Window_Command
     contents.font.name = old_f
   end
 
+  # Align text right
   def alignment
-    1
+    2
   end
 
   # Skip continue if disabled
