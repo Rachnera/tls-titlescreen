@@ -97,13 +97,23 @@ class Window_TitleCommand < Window_Command
   def update_cursor
     if @selector.nil?
       @selector = Sprite.new
-      @selector.visible = true
-      @selector.z = z+1
       @selector.bitmap = CustomTitleScreen.bitmap("selector")
     end
 
     i_rect = item_rect(@index)
     @selector.x = x + i_rect.x
     @selector.y = y + i_rect.y
+    @selector.z = z + 1
+  end
+
+  alias original_879_dispose dispose
+  def dispose
+    if @selector
+      @selector.dispose
+      @selector.bitmap.dispose
+      @selector = nil
+    end
+
+    original_879_dispose
   end
 end
