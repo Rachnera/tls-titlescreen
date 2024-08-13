@@ -4,13 +4,19 @@ module CustomTitleScreen
       name: "Nunito",
     },
   }
+
+  class << self
+    def bitmap(filename)
+      Cache.system("titlescreen/#{filename}")
+    end
+  end
 end
 
 class Scene_Title < Scene_Base
   alias original_879_create_command_window create_command_window
   def create_command_window
     original_879_create_command_window
-    @command_window.windowskin = Cache.system("TitleScreen")
+    @command_window.windowskin = CustomTitleScreen.bitmap("Window")
   end
 end
 
