@@ -14,4 +14,4 @@ See [there](https://forums.rpgmakerweb.com/index.php?threads/how-do-i-font-chang
 
 ### Change text colors
 
-Update the config parameters `color` -> `text` and/or `color` -> `outline` with the RGBA values of the desired color(s).
+Update the config parameters `color` -> `text`, `color` -> `outline` and/or `color` -> `disabled` with the RGBA values of the desired color(s).
