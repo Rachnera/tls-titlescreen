@@ -53,4 +53,18 @@ class Window_TitleCommand < Window_Command
 
     original_879_cursor_up(wrap)
   end
+
+  # Replace standard highlight with custom selector
+  def update_cursor
+    if @selector.nil?
+      @selector = Sprite.new
+      @selector.visible = true
+      @selector.z = z+1
+      @selector.bitmap = CustomTitleScreen.bitmap("selector")
+    end
+
+    i_rect = item_rect(@index)
+    @selector.x = x + i_rect.x
+    @selector.y = y + i_rect.y
+  end
 end
