@@ -2,6 +2,7 @@ module CustomTitleScreen
   CONFIG = {
     font: {
       name: "Nunito",
+      size: 32,
     },
   }
 
@@ -24,10 +25,20 @@ class Window_TitleCommand < Window_Command
   def draw_text(*args)
     old_f = contents.font.name
     contents.font.name = CustomTitleScreen::CONFIG[:font][:name]
+    contents.font.size = font_size
 
     contents.draw_text(*args)
 
     contents.font.name = old_f
+    reset_font_settings # Reset font size and color; cf Yanfly Core; might not be strictly necessary, but better safe than sorry
+  end
+
+  def line_height
+    font_size
+  end
+
+  def font_size
+    CustomTitleScreen::CONFIG[:font][:size]
   end
 
   # Align text right
