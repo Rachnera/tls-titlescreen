@@ -94,16 +94,25 @@ class Window_TitleCommand < Window_Command
   end
 
   # Replace standard highlight with custom selector
-  def update_cursor
+  alias original_879_update update
+  def update
+    original_879_update
+
     if @selector.nil?
       @selector = Sprite.new
       @selector.bitmap = CustomTitleScreen.bitmap("selector")
     end
 
+    @selector.visible = open? && active
+
     i_rect = item_rect(@index)
     @selector.x = x + i_rect.x
     @selector.y = y + i_rect.y
     @selector.z = z + 1
+  end
+
+  def update_cursor
+    # Do nothing, fully replaced with the above function
   end
 
   alias original_879_dispose dispose
