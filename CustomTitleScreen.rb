@@ -35,6 +35,11 @@ class Window_TitleCommand < Window_Command
     2
   end
 
+  def update_placement
+    self.x = Graphics.width - width
+    self.y = 0
+  end
+
   # Skip continue if disabled
   alias original_879_cursor_down cursor_down
   def cursor_down(wrap = false)
