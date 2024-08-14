@@ -2,7 +2,7 @@ module CustomTitleScreen
   CONFIG = {
     font: {
       name: "Amiri",
-      size: 64,
+      size: 72,
       italic: true,
     },
     color: { # RGBA format
@@ -138,6 +138,7 @@ class Window_TitleCommand < Window_Command
     rect = original_879_item_rect_for_text(index)
 
     rect.y -= font_size/2 * index
+    rect.y -= 8 * (index+1)
 
     rect
   end
