@@ -1,13 +1,14 @@
 module CustomTitleScreen
   CONFIG = {
     font: {
-      name: "Nunito",
-      size: 32,
+      name: "Amiri",
+      size: 64,
+      italic: true,
     },
     color: { # RGBA format
-      text: [31, 37, 37, 255],
-      outline: [181, 161, 128, 255],
-      disabled: [127, 127, 127, 255],
+      text: [24, 33, 32, 255],
+      outline: [165, 151, 117, 255],
+      disabled: [165, 151, 117, 255],
     }
   }
 
@@ -40,6 +41,7 @@ class Window_TitleCommand < Window_Command
     old_f = contents.font.name
     contents.font.name = CustomTitleScreen::CONFIG[:font][:name]
     contents.font.size = font_size
+    contents.font.italic = CustomTitleScreen::CONFIG[:font][:italic]
 
     contents.font.color =
       if command_enabled?(index)
@@ -61,6 +63,10 @@ class Window_TitleCommand < Window_Command
 
   def font_size
     CustomTitleScreen::CONFIG[:font][:size]
+  end
+
+  def window_width
+    240 # Could be anything wide enough for the text really?
   end
 
   # Align text right
@@ -100,14 +106,14 @@ class Window_TitleCommand < Window_Command
 
     if @selector.nil?
       @selector = Sprite.new
-      @selector.bitmap = CustomTitleScreen.bitmap("selector")
+      @selector.bitmap = CustomTitleScreen.bitmap("Selectbar")
     end
 
     @selector.visible = open? && active
 
-    i_rect = item_rect(@index)
-    @selector.x = x + i_rect.x
-    @selector.y = y + i_rect.y
+    i_rect = item_rect_for_text(@index)
+    @selector.x = Graphics.width - @selector.width
+    @selector.y = y + i_rect.y + i_rect.height - @selector.height
     @selector.z = z + 1
   end
 
@@ -124,5 +130,15 @@ class Window_TitleCommand < Window_Command
     end
 
     original_879_dispose
+  end
+
+  # FIXME Super weird stuff to fix ??? behavior with font scaling
+  alias original_879_item_rect_for_text item_rect_for_text
+  def item_rect_for_text(index)
+    rect = original_879_item_rect_for_text(index)
+
+    rect.y -= font_size/2 * index
+
+    rect
   end
 end
