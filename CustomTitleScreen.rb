@@ -3,7 +3,7 @@ module CustomTitleScreen
     # If you change anything about the font, you'll likely want to change some of the +8, -4... below to make everything "perfectly" aligned again
     font: {
       name: "Amiri",
-      size: 72,
+      size: 60,
       italic: true,
     },
     color: { # RGBA format
@@ -113,8 +113,8 @@ class Window_TitleCommand < Window_Command
     @selector.visible = open? && active
 
     i_rect = item_rect_for_text(@index)
-    @selector.x = x + width - @selector.width - 4
-    @selector.y = y + i_rect.y + i_rect.height - @selector.height - 3
+    @selector.x = x + width - @selector.width - 7
+    @selector.y = y + i_rect.y + i_rect.height - @selector.height + 3
     @selector.z = z + 1
   end
 
