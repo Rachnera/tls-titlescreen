@@ -77,7 +77,7 @@ class Window_TitleCommand < Window_Command
 
   def update_placement
     self.x = Graphics.width - width
-    self.y = 0
+    self.y = -12
   end
 
   # Skip continue if disabled
@@ -139,7 +139,7 @@ class Window_TitleCommand < Window_Command
     rect = original_879_item_rect_for_text(index)
 
     rect.y -= font_size/2 * index
-    rect.y -= 6 * (index+1)
+    rect.y -= 6 * index
 
     rect
   end
